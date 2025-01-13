@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Whole30 Checker</title>
     <link rel="stylesheet" href="style.css">
+	<script src="quagga.min.js"></script>
 </head>
 <body>
     <h1>Whole30 Product Checker</h1>
@@ -13,9 +14,18 @@
     <button onclick="checkProduct()">Check Compliance</button>
     <p id="result"></p>
     <script src="script.js"></script>
-	<button onclick="startScanner()">Scan Barcode</button>
-	<video id="scanner" style="display: none;"></video>
+	<div id="barcode-scanner">
+  <button onclick="startBarcodeScanner()">Scan Barcode</button>
+  <video id="scanner-preview" style="width: 100%; max-width: 400px; margin-top: 10px;"></video>
+</div>
 <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+<div id="rules-container">
+  <h2>Whole30 Rules</h2>
+  <div id="rules-list"></div>
+</div>
+<div id="table-container">
+  <h2>Extracted Tables</h2>
+</div>
 </body>
 </html>
  
