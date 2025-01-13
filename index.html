@@ -8,10 +8,14 @@
 </head>
 <body>
     <h1>Whole30 Product Checker</h1>
-    <input type="text" id="productInput" placeholder="Enter a product name...">
+    <input type="text" id="productInput" placeholder="Enter a product name..." onkeyup="showSuggestions()">
+<ul id="suggestions"></ul>
     <button onclick="checkProduct()">Check Compliance</button>
     <p id="result"></p>
     <script src="script.js"></script>
+	<button onclick="startScanner()">Scan Barcode</button>
+	<video id="scanner" style="display: none;"></video>
+<button onclick="toggleDarkMode()">Toggle Dark Mode</button>
 </body>
 </html>
  

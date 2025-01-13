@@ -25,3 +25,56 @@ function checkProduct() {
         output.className = 'unknown';
     }
 }
+
+function showSuggestions() {
+    const input = document.getElementById('productInput').value.toLowerCase();
+    const suggestionsBox = document.getElementById('suggestions');
+    suggestionsBox.innerHTML = '';
+
+    if (input.length === 0) return;
+
+    const matches = products.filter(product =>
+        product.name.toLowerCase().includes(input)
+    );
+
+    matches.forEach(match => {
+        const suggestion = document.createElement('li');
+        suggestion.innerText = match.name;
+        suggestion.onclick = () => {
+            document.getElementById('productInput').value = match.name;
+            suggestionsBox.innerHTML = '';
+        };
+        suggestionsBox.appendChild(suggestion);
+    });
+}
+function startScanner() {
+    const scanner = document.getElementById('scanner');
+    scanner.style.display = 'block';
+
+    Quagga.init({
+        inputStream: {
+            name: 'Live',
+            type: 'LiveStream',
+            target: scanner
+        },
+        decoder: {
+            readers: ['upc_reader']
+        }
+    }, err => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        Quagga.start();
+    });
+
+    Quagga.onDetected(data => {
+        console.log('Barcode detected:', data.codeResult.code);
+        Quagga.stop();
+        scanner.style.display = 'none';
+    });
+}
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+}
+
